@@ -541,7 +541,7 @@ static int walk_dir(char *path, struct dbhandle *db)
 			sprintf(child, "%s/%s", path, entry->d_name);
 
 		ret = statx(0, child, 0, STATX_BASIC_STATS, &st);
-		if (ret || !(st.stx_mask | STATX_BASIC_STATS)) {
+		if (ret || !(st.stx_mask & STATX_BASIC_STATS)) {
 			eprintf("Failed to stat %s: %s\n",
 					path, strerror(errno));
 			continue;
